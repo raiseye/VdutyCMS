@@ -1,0 +1,143 @@
+/*
+ * Override Bootstrap's default container.
+ */
+html {
+    font-size: 100%; 
+    -ms-text-size-adjust: 100%; 
+    -webkit-text-size-adjust: 100%; 
+}
+body {
+  font-family: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif";
+  font-weight: normal;
+  padding-top: 50px;
+  padding-left:0px;
+  padding-right:0px;
+  margin:0px;
+  overflow:-Scroll;
+  overflow-x:hidden;
+  overflow:-moz-scrollbars-vertical; 
+}
+a {
+  color: #585858;
+}
+a:hover,
+a:focus {
+  color: #00a23f;
+}
+ul li{
+	 list-style-type:none;
+}
+pre {
+  border: none;
+  background-color: transparent;
+}
+@media (min-width: 768px) {
+  .site-navbar .navbar-nav {
+    float: right!important;
+  }
+}
+.navbar-inverse {
+  background-color: #ffffff;
+  border-color: transparent;
+  height:100px;
+}
+.navbar-inverse .navbar-brand {
+  color: #00a23f;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #333333;
+  font-size:16px;
+  padding-top:40px;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+	 color: #00a23f;
+	 border-bottom:2px solid #00a23f;
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .active > a:hover {
+  color: #00a23f;
+  border-bottom:2px solid #00a23f;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #00a23f;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #00a23f;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: transparent;
+}
+.banner{
+	width:100%;
+	padding-top:50px;
+}
+.our_advantages_content{
+	width:100%;
+}
+.our_advantages_title{
+	margin-bottom:100px;	
+}
+.our_advantages_title h1{
+	font-size:36px;
+	color:#ff8000;
+	text-align:center;
+	padding-top:50px;
+	font-family: "Microsoft Yahei"
+}
+.our_advantages_title p{
+	font-size:18px;
+	color:#585858;
+	text-align:center;
+}
+.container{position:relative;z-index:2}
+.our_advantages_detail{
+	width:100%;
+	margin-top:80px;
+}
+.media_res_title{
+	font-size:30px;
+	color:#585858;
+}
+.media_res_detail{
+	font-size:18px;
+	color:#909090;
+	padding-left:70px;
+	line-height: 28px;
+}
+/*****************************************footer************************************************************************/
+/*footer 网站尾部样式 start*/
+/*底部导航*/
+/* footer a:link,.footer a:visited{ color:#aeb2ae;} */
+.about_us{
+	background-color: #475048;
+	width:100%;
+	height:280px;
+	margin-top:24px;
+	line-height: 22px; 
+}
+.copyright{
+	background-color: #393f38;
+	width:100%;
+	margin-bottom:2px;
+}
+.copyright p{
+	color:#aeb2ae;
+	font-size:13px;
+	text-align:center;
+}
+.about_us_content{
+	padding-top:20px;
+/* 	padding-left:100px; */
+}
+.about_us_content h1{
+	color:#ffffff;
+	font-size:18px;
+}
+.about_us_content p{
+	color:#ffffff;
+	font-size:13px;
+}

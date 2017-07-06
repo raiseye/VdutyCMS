@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	         	http://www.springframework.org/schema/beans/spring-beans.xsd
+	         	http://www.springframework.org/schema/lang
+	         	http://www.springframework.org/schema/lang/spring-lang.xsd      
+	         	http://www.springframework.org/schema/tx   
+	         	http://www.springframework.org/schema/tx/spring-tx.xsd    
+	         	http://www.springframework.org/schema/aop     
+	         	http://www.springframework.org/schema/aop/spring-aop.xsd    
+	         	http://www.springframework.org/schema/mvc     
+	         	http://www.springframework.org/schema/mvc/spring-mvc.xsd   
+	         	http://www.springframework.org/schema/context     
+	         	http://www.springframework.org/schema/context/spring-context.xsd
+	         	http://www.springframework.org/schema/cache
+	         	http://www.springframework.org/schema/cache/spring-cache.xsd
+	         	http://www.springframework.org/schema/task 
+	         	http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 自动扫描该基础包下的所有类，并自动装配成bean -->
+	<context:component-scan base-package="com.vduty.cms.web" />
+	<!-- 装载相关配置文件 -->
+	<bean id="propertyConfigurer" class="com.vduty.cms.web.utils.PropertyUtils">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--创建jdbc数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 当mybatis的xml文件和mapper接口不在相同包下时，需要用mapperLocations属性指定xml文件的路径。 *是个通配符，代表所有的文件，**代表所有目录下 -->
+		<property name="mapperLocations"
+			value="classpath:com/vduty/cms/web/**/*.xml" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper ,就是dao-->
+	<bean  id ="scandaos" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
+		<property name="basePackage" value="com.vduty.cms.web.admin.dao" />
+	</bean>
+
+</beans>

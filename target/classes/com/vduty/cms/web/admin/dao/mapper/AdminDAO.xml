@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vduty.cms.web.admin.dao.AdminDAO">
+
+	<resultMap type="com.vduty.cms.web.admin.entity.Admin" id="AdminResultMap">
+		<id property="adminId" column="id"/>  
+        <result property="name" column="name"/>  
+        <result property="password" column="password"/>  
+        <result property="createTime" column="create_time"/>          
+	</resultMap>
+
+	<insert id="addAdmin" parameterType="com.vduty.cms.web.admin.entity.Admin">
+		INSERT INTO   
+		admin(name,password,create_time)
+		value(#{name},#{password},#{createTime}) 
+	</insert>
+	
+	<select id="getAdminByName" parameterType="String" resultType="com.vduty.cms.web.admin.entity.Admin"
+		resultMap="AdminResultMap">
+		SELECT * FROM admin WHERE #{name} = name	
+	</select>
+	
+	<select id="getAllList" resultType="com.vduty.cms.web.admin.entity.Admin"
+		resultMap="AdminResultMap">
+		SELECT * FROM admin WHERE name != 'root' LIMIT
+		#{offset},#{rows} 
+	</select>
+
+	<select id="getAllListCount" resultType="int">
+		SELECT COUNT(*) FROM
+		admin
+	</select>
+	
+	<delete id="delAdmin" parameterType="long">
+		DELETE FROM admin WHERE id=#{id}
+	</delete>
+	
+	<update id="updateAdminPwdById">
+		UPDATE admin SET password=#{pwd} WHERE id=#{id}
+	</update>
+
+</mapper>
