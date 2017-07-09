@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vduty.cms.web.dao.UserDAO">
+
+	<resultMap type="com.vduty.cms.web.entity.User" id="UserResultMap">
+		<id property="userId" column="id"/>  
+        <result property="name" column="name"/>  
+        <result property="password" column="password"/>  
+        <result property="createTime" column="create_time"/>          
+	</resultMap>
+
+	<insert id="addUser" parameterType="com.vduty.cms.web.entity.User">
+		INSERT INTO   
+		user(name,password,create_time)
+		value(#{name},#{password},#{createTime}) 
+	</insert>
+	
+	<select id="getUserByName" parameterType="String" resultType="com.vduty.cms.web.entity.User"
+		resultMap="UserResultMap">
+		SELECT * FROM user WHERE #{name} = name	
+	</select>
+	
+	<select id="getAllList" resultType="com.vduty.cms.web.entity.User"
+		resultMap="UserResultMap">
+		SELECT * FROM user WHERE name != 'root' LIMIT
+		#{offset},#{rows} 
+	</select>
+
+	<select id="getAllListCount" resultType="int">
+		SELECT COUNT(*) FROM
+		user
+	</select>
+	
+	<delete id="delUser" parameterType="long">
+		DELETE FROM user WHERE id=#{id}
+	</delete>
+	
+	<update id="updateUserPwdById">
+		UPDATE user SET password=#{pwd} WHERE id=#{id}
+	</update>
+
+</mapper>

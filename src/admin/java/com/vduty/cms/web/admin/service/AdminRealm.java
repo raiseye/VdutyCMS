@@ -47,8 +47,8 @@ public class AdminRealm extends AuthorizingRealm {
 			return null;
 		}
 		AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(admin.getName(), admin.getPassword(), getName());
-		setSession("currentUser", admin.getName());
-		setSession("currenUserID", admin.getAdminId());
+		setSession("currentAdmin", admin.getName());
+		setSession("currenAdminID", admin.getAdminId());
 		return authcInfo;
 	}
 

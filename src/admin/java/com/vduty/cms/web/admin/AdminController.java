@@ -24,14 +24,17 @@ import com.vduty.cms.web.utils.MD5Utils;
 @RequestMapping("/admin")
 public class AdminController extends BaseController{    
 	
-	
+	/**
+	 * 登录
+	 * @return
+	 */
 	@RequestMapping("/login")
 	public String showLoginView(){
 		return "admin/login";
 	}
 	
 	/**
-	 *
+	 *登录验证
 	 * @param name
 	 * @param password
 	 * @param attr

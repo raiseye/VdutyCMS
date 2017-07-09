@@ -26,10 +26,17 @@
 	</bean>
 	
 	<bean id="adminRealm" class="com.vduty.cms.web.admin.service.AdminRealm" />
-
+    <!-- <bean id="userRealm" class="com.vduty.cms.web.service.UserRealm" /> -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
-		<property name="realm" ref="adminRealm" />
+		<!-- SecurityUtils.getSubject().login 会有adminRealm对应的方法执行 -->
+		 <!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
+        <property name="realms">
+            <list>
+               <!--  <ref bean="userRealm" /> -->
+                <ref bean="adminRealm"/>
+            </list>
+        </property>
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	
