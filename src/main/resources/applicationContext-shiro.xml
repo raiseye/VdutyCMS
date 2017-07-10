@@ -31,12 +31,13 @@
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
 		<!-- SecurityUtils.getSubject().login 会有adminRealm对应的方法执行 -->
 		 <!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
-        <property name="realms">
+        <!-- <property name="realms">
             <list>
-               <!--  <ref bean="userRealm" /> -->
+                <ref bean="userRealm" />
                 <ref bean="adminRealm"/>
             </list>
-        </property>
+        </property> -->
+        <property name="realm" ref="adminRealm" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	

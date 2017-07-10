@@ -1,4 +1,4 @@
-package com.vduty.cms.web.service;
+package com.vduty.cms.web.user.service;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -11,7 +11,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.vduty.cms.shiro.utils.*;
-import com.vduty.cms.web.entity.User;
+import com.vduty.cms.web.user.entity.User;
 
 public class UserRealm extends AuthorizingRealm {
 	@Autowired

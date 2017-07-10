@@ -1,4 +1,4 @@
-package com.vduty.cms.web.entity;
+package com.vduty.cms.web.user.entity;
 import java.util.Date;
 public class User {
 

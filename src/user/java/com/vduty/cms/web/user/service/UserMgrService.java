@@ -1,4 +1,4 @@
-package com.vduty.cms.web.service;
+package com.vduty.cms.web.user.service;
 
 import java.util.Date;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import com.vduty.cms.web.dao.UserDAO;
-import com.vduty.cms.web.entity.User;
+import com.vduty.cms.web.user.dao.UserDAO;
+import com.vduty.cms.web.user.entity.User;
 import com.vduty.cms.web.utils.MD5Utils;
 //解决方法是①首先查看@Autowired标记的字段对应的接口的实现类是否标记@Service、@Repository
 //等交给Spring的IOC容器管理；②查看对应的类型是否一致或满足里氏代换原则，

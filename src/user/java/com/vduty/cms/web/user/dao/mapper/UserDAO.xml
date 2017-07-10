@@ -2,27 +2,27 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.vduty.cms.web.dao.UserDAO">
+<mapper namespace="com.vduty.cms.web.user.dao.UserDAO">
 
-	<resultMap type="com.vduty.cms.web.entity.User" id="UserResultMap">
+	<resultMap type="com.vduty.cms.web.user.entity.User" id="UserResultMap">
 		<id property="userId" column="id"/>  
         <result property="name" column="name"/>  
         <result property="password" column="password"/>  
         <result property="createTime" column="create_time"/>          
 	</resultMap>
 
-	<insert id="addUser" parameterType="com.vduty.cms.web.entity.User">
+	<insert id="addUser" parameterType="com.vduty.cms.web.user.entity.User">
 		INSERT INTO   
 		user(name,password,create_time)
 		value(#{name},#{password},#{createTime}) 
 	</insert>
 	
-	<select id="getUserByName" parameterType="String" resultType="com.vduty.cms.web.entity.User"
+	<select id="getUserByName" parameterType="String" resultType="com.vduty.cms.web.user.entity.User"
 		resultMap="UserResultMap">
 		SELECT * FROM user WHERE #{name} = name	
 	</select>
 	
-	<select id="getAllList" resultType="com.vduty.cms.web.entity.User"
+	<select id="getAllList" resultType="com.vduty.cms.web.user.entity.User"
 		resultMap="UserResultMap">
 		SELECT * FROM user WHERE name != 'root' LIMIT
 		#{offset},#{rows} 
