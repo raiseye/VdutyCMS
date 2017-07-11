@@ -13,13 +13,13 @@
 
 	<insert id="addUser" parameterType="com.vduty.cms.web.user.entity.User">
 		INSERT INTO   
-		user(name,password,create_time)
+		users(name,password,create_time)
 		value(#{name},#{password},#{createTime}) 
 	</insert>
 	
 	<select id="getUserByName" parameterType="String" resultType="com.vduty.cms.web.user.entity.User"
 		resultMap="UserResultMap">
-		SELECT * FROM user WHERE #{name} = name	
+		SELECT * FROM users WHERE #{name} = name	
 	</select>
 	
 	<select id="getAllList" resultType="com.vduty.cms.web.user.entity.User"
@@ -30,15 +30,15 @@
 
 	<select id="getAllListCount" resultType="int">
 		SELECT COUNT(*) FROM
-		user
+		users
 	</select>
 	
 	<delete id="delUser" parameterType="long">
-		DELETE FROM user WHERE id=#{id}
+		DELETE FROM users WHERE id=#{id}
 	</delete>
 	
 	<update id="updateUserPwdById">
-		UPDATE user SET password=#{pwd} WHERE id=#{id}
+		UPDATE users SET password=#{pwd} WHERE id=#{id}
 	</update>
 
 </mapper>

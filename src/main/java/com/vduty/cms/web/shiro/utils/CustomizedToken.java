@@ -1,4 +1,4 @@
-package com.vduty.cms.shiro.utils;
+package com.vduty.cms.web.shiro.utils;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 

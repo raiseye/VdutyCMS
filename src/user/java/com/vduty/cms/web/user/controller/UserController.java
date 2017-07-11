@@ -1,4 +1,4 @@
-package com.vduty.cms.web.admin;
+package com.vduty.cms.web.user.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -23,8 +23,8 @@ import com.vduty.cms.web.utils.MD5Utils;
  *
  */
 @Controller
-@RequestMapping("/admin")
-public class AdminController extends BaseController{    
+@RequestMapping("/usercenter")
+public class UserController extends BaseController{    
 	
 	/**
 	 * 登录
@@ -32,7 +32,7 @@ public class AdminController extends BaseController{
 	 */
 	@RequestMapping("/login")
 	public String showLoginView(){
-		return "admin/login";
+		return "user/login";
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class AdminController extends BaseController{
 		try {
 			//org.apache.shiro.subject,
 			SecurityUtils.getSubject().login(new CustomizedToken(name,
-					MD5Utils.encrypt(password),LoginType.ADMIN.toString()));
+					MD5Utils.encrypt(password),LoginType.USER.toString()));
 			result.setResult(true);
 			return result;
 		} catch (AuthenticationException e){
@@ -67,7 +67,7 @@ public class AdminController extends BaseController{
 	@RequestMapping("/logout")
 	public String adminLogout(){
 		SecurityUtils.getSubject().logout();
-		return "redirect:/admin/login";
+		return "redirect:/user/login";
 	}
 	
 

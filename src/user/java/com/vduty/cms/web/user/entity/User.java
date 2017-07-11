@@ -2,12 +2,12 @@ package com.vduty.cms.web.user.entity;
 import java.util.Date;
 public class User {
 
-	private int  id     ;   
+	private int  userId     ;   
 	public int getId() {
-		return id;
+		return userId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 	public String getName() {
 		return name;
@@ -58,10 +58,10 @@ public class User {
 		this.update_time = update_time;
 	}
 	public Date getCreate_time() {
-		return create_time;
+		return createTime;
 	}
 	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
+		this.createTime = create_time;
 	}
 	private  String  name  ;   
 	private String salt ;   
@@ -71,7 +71,7 @@ public class User {
 	private String  last_loginip ; 
 	private  Date last_logintime ; 
 	private Date update_time  ; 
-	private Date create_time   ; 
+	private Date createTime   ; 
 	
 	
 	

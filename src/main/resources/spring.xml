@@ -48,8 +48,13 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 当mybatis的xml文件和mapper接口不在相同包下时，需要用mapperLocations属性指定xml文件的路径。 *是个通配符，代表所有的文件，**代表所有目录下 -->
-		<property name="mapperLocations"
-			value="classpath:com/vduty/cms/web/**/*.xml" />
+		<property name="mapperLocations" value="classpath:com/vduty/cms/web/**/*.xml" />
+		<!-- <property name="mapperLocations">
+		<array>
+		<value>value="classpath:com/vduty/cms/web/admin/dao/mapper/*.xml"</value>
+		<value>value="classpath:com/vduty/cms/web/user/dao/mapper/*.xml"</value>
+		</array>
+		</property>	 -->
 	</bean>
 
 	<!-- 配置事务管理器 -->
@@ -61,7 +66,7 @@
 	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper ,就是dao-->
 	<bean  id ="scandaos" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="basePackage" value="com.vduty.cms.web.admin.dao" />
+		<property name="basePackage" value="com.vduty.cms.web" />
 	</bean>
 
 </beans>

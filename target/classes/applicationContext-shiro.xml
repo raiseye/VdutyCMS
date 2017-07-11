@@ -25,8 +25,8 @@
 		</property>
 	</bean>
 	
-	<bean id="adminRealm" class="com.vduty.cms.web.admin.service.AdminRealm" />
-    <!-- <bean id="userRealm" class="com.vduty.cms.web.service.UserRealm" /> -->
+	<!-- <bean id="adminRealm" class="com.vduty.cms.web.admin.service.AdminRealm" /> -->
+    <bean id="userRealm" class="com.vduty.cms.web.shiro.utils.UserRealm" />
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
 		<!-- SecurityUtils.getSubject().login 会有adminRealm对应的方法执行 -->
@@ -36,8 +36,8 @@
                 <ref bean="userRealm" />
                 <ref bean="adminRealm"/>
             </list>
-        </property> -->
-        <property name="realm" ref="adminRealm" />
+        </property>  -->
+        <property name="realm" ref="userRealm" /> 
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	

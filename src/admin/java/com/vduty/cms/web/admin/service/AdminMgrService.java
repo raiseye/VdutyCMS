@@ -11,11 +11,14 @@ import com.vduty.cms.web.admin.dao.AdminDAO;
 import com.vduty.cms.web.admin.entity.Admin;
 import com.vduty.cms.web.admin.entity.vo.PageVo;
 import com.vduty.cms.web.constant.SystemConstant;
+import com.vduty.cms.web.user.dao.UserDAO;
 import com.vduty.cms.web.utils.MD5Utils;
 
 @Service
 public class AdminMgrService {
 
+	
+	
 	@Autowired
 	private AdminDAO adminDAO;
 

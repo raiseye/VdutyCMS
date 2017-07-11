@@ -1,4 +1,4 @@
-package com.vduty.cms.shiro.utils;
+package com.vduty.cms.web.shiro.utils;
 
 //登录类型
 //普通用户登录，管理员登录
