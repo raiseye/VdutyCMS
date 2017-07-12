@@ -5,60 +5,88 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
 	default-lazy-init="true">
-	
-	<description>Shiro安全配置</description>
 
+	<description>Shiro安全配置</description>
+	<!-- <bean id="myRoles" class="com.vduty.cms.web.shiro.utils.RolesAuthorizationFilter"/> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/admin/login" />
-		<property name="successUrl" value="/manager/admin" />
-		<property name="unauthorizedUrl" value="/admin/login" />
+		<property name="loginUrl" value="/user/login" />
+		<property name="successUrl" value="/usercenter/" />
+		<property name="unauthorizedUrl" value="/user/login" />
+		<property name="filters">
+			<map>
+
+				<entry key="myRoles">
+					<bean class="com.vduty.cms.web.shiro.utils.RolesAuthorizationFilter" />
+				</entry>
+			</map>
+		</property>
 		<property name="filterChainDefinitions">
 			<value>
-<!-- 				/admin/** = authc -->
+				<!-- /admin/** = authc -->
 				/admin/login = anon
-				/manager/* = authc
-<!-- 				/role/** = roles[admin] -->
-<!-- 				/permission/** = perms[permssion:look] -->
-<!-- 				/** = authc -->
+				/manager/* = authc,myRoles[admin]
+				/usercenter/*
+				=authc,myRoles[user]
+				<!-- /role/** = roles[admin] -->
+				<!-- /permission/** = perms[permssion:look] -->
+				<!-- /** = authc -->
 			</value>
 		</property>
 	</bean>
-	
-	<!-- <bean id="adminRealm" class="com.vduty.cms.web.admin.service.AdminRealm" /> -->
-    <bean id="userRealm" class="com.vduty.cms.web.shiro.utils.UserRealm" />
+
+	<bean id="adminRealm" class="com.vduty.cms.web.admin.service.AdminRealm" />
+	<bean id="userRealm" class="com.vduty.cms.web.user.service.UserRealm" />
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
 		<!-- SecurityUtils.getSubject().login 会有adminRealm对应的方法执行 -->
-		 <!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
-        <!-- <property name="realms">
-            <list>
-                <ref bean="userRealm" />
-                <ref bean="adminRealm"/>
-            </list>
-        </property>  -->
-        <property name="realm" ref="userRealm" /> 
+		<!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
+
+		<!-- <property name="realm" ref="userRealm" /> -->
+		<property name="authenticator" ref="authenticator"></property>
+		<property name="realms">
+			<list>
+				<ref bean="userRealm" />
+				<ref bean="adminRealm" />
+			</list>
+		</property>
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-	
+	<!-- 配置使用自定义认证器，可以实现多Realm认证，并且可以指定特定Realm处理特定类型的验证 -->
+	<bean id="authenticator"
+		class="com.vduty.cms.web.shiro.utils.CustomizedModularRealmAuthenticator">
+		<property name="definedRealms">
+			<map>
+				<entry key="userRealm" value-ref="userRealm" />
+				<entry key="adminRealm" value-ref="adminRealm" />
+			</map>
+		</property>
+		<!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
+		<property name="authenticationStrategy">
+			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+		</property>
+	</bean>
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
-          
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">  
-        <property name="securityManager" ref="securityManager" />  
-    </bean>   
-    
-    <bean id="hashedCredentialsMatcher"  
-        class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">  
-            <property name="hashAlgorithmName" value="MD5" />  
-            <property name="storedCredentialsHexEncoded" value="true" />  
-            <property name="hashIterations" value="1" />  
-    </bean>
-    
-    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->  
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>     
 
-	<!-- AOP式方法级权限检查  -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+	<bean id="hashedCredentialsMatcher"
+		class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="MD5" />
+		<property name="storedCredentialsHexEncoded" value="true" />
+		<property name="hashIterations" value="1" />
+	</bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- AOP式方法级权限检查 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
 

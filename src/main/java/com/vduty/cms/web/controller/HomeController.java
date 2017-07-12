@@ -37,7 +37,7 @@ public class HomeController extends BaseController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "home";
+		return "main/index";
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)

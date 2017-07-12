@@ -98,7 +98,7 @@ input.error:focus {
 						dataType : 'json',
 						success : function(data) {
 							if (data.result) {
-								window.location.href = "${BASE_PATH}/manager/admin";
+								window.location.href = "${BASE_PATH}/usercenter/index";
 							} else {
 								showErrors($('#userForm'), data.msg);
 							}

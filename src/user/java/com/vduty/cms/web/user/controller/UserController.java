@@ -23,7 +23,7 @@ import com.vduty.cms.web.utils.MD5Utils;
  *
  */
 @Controller
-@RequestMapping("/usercenter")
+@RequestMapping("/user")
 public class UserController extends BaseController{    
 	
 	/**
