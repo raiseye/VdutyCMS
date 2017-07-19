@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>职道后台管理</title>
+        <title>后台管理</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 		<link rel="shortcut icon" href="${main_ctx}/img/favicon.ico"/>
 		<link rel="bookmark" href="${main_ctx}/img/favicon.ico"/>

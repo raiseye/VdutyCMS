@@ -24,7 +24,7 @@ import com.vduty.cms.web.utils.MD5Utils;
  *
  */
 @Controller
-@RequestMapping("/manager/admin")
+@RequestMapping("/manageradmin/admin")
 public class AdminMgrController extends BaseController{
 	
 	@RequestMapping

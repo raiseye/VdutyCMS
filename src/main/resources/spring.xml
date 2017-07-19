@@ -24,6 +24,12 @@
 	         	http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean class="com.vduty.cms.web.utils.ApplicationContextHandle" lazy-init="false"/>  
+	<bean id="jobFactory" class="com.vduty.cms.quartz.utils.MyJobFactory"></bean>
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        <property name="jobFactory" ref="jobFactory"></property>  
+    </bean>  
+	
 	<!-- 自动扫描该基础包下的所有类，并自动装配成bean -->
 	<context:component-scan base-package="com.vduty.cms.web" />
 	<!-- 装载相关配置文件 -->
@@ -34,7 +40,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!--创建jdbc数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -49,12 +55,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 当mybatis的xml文件和mapper接口不在相同包下时，需要用mapperLocations属性指定xml文件的路径。 *是个通配符，代表所有的文件，**代表所有目录下 -->
 		<property name="mapperLocations" value="classpath:com/vduty/cms/web/**/*.xml" />
-		<!-- <property name="mapperLocations">
-		<array>
-		<value>value="classpath:com/vduty/cms/web/admin/dao/mapper/*.xml"</value>
-		<value>value="classpath:com/vduty/cms/web/user/dao/mapper/*.xml"</value>
-		</array>
-		</property>	 -->
+		<!-- <property name="mapperLocations"> <array> <value>value="classpath:com/vduty/cms/web/admin/dao/mapper/*.xml"</value> 
+			<value>value="classpath:com/vduty/cms/web/user/dao/mapper/*.xml"</value> 
+			</array> </property> -->
 	</bean>
 
 	<!-- 配置事务管理器 -->
@@ -63,10 +66,14 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper ,就是dao-->
-	<bean  id ="scandaos" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper ,就是dao -->
+	<bean id="scandaos" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 		<property name="basePackage" value="com.vduty.cms.web" />
 	</bean>
+
+	
+
+
 
 </beans>

@@ -21,6 +21,7 @@ public class AdminMgrService {
 	
 	@Autowired
 	private AdminDAO adminDAO;
+	
 
 	@CacheEvict(value = "admin", allEntries = true)
 	public Admin addAdmin(String name, String password) {
@@ -108,6 +109,15 @@ public class AdminMgrService {
 	 */
 	public String test(String test) {
 		return test;
+	}
+	
+	/**
+	 * 保存网站日志
+	 * @param log
+	 */
+	public void saveWebLog(String log)
+	{
+		adminDAO.savaWebRunLog(log);
 	}
 
 }

@@ -55,7 +55,7 @@ input.error:focus {
 	<div class="container">
 
 		<form class="form-signin" id="userForm"
-			action="${BASE_PATH}/usercenter/login/validate" autocomplete="off"
+			action="${BASE_PATH}/user/login/validate" autocomplete="off"
 			method="post">
 			<div class="login-wrap">
 				<div class="form-group">
@@ -98,7 +98,7 @@ input.error:focus {
 						dataType : 'json',
 						success : function(data) {
 							if (data.result) {
-								window.location.href = "${BASE_PATH}/usercenter/index";
+								window.location.href = "${BASE_PATH}/manageruser/user";
 							} else {
 								showErrors($('#userForm'), data.msg);
 							}

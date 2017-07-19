@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>职道后台登录</title>
+<title>后台登录</title>
 
 <!-- Bootstrap core CSS -->
 <link href="${ctx}/css/bootstrap-core/bootstrap.min.css"
@@ -98,7 +98,7 @@ input.error:focus {
 						dataType : 'json',
 						success : function(data) {
 							if (data.result) {
-								window.location.href = "${BASE_PATH}/manager/admin";
+								window.location.href = "${BASE_PATH}/manageradmin/admin";
 							} else {
 								showErrors($('#adminForm'), data.msg);
 							}

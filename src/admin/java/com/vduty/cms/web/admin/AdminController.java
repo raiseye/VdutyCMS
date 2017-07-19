@@ -48,6 +48,7 @@ public class AdminController extends BaseController{
 			@RequestParam("password") String password, RedirectAttributes attr){
 		JsonVo<Admin> result = new JsonVo<Admin>();
 		try {
+			
 			//org.apache.shiro.subject,
 			SecurityUtils.getSubject().login(new CustomizedToken(name,
 					MD5Utils.encrypt(password),LoginType.ADMIN.toString()));

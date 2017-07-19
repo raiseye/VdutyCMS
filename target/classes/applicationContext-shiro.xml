@@ -11,7 +11,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/user/login" />
-		<property name="successUrl" value="/usercenter/" />
+		<property name="successUrl" value="/membercenter/main" />
 		<property name="unauthorizedUrl" value="/user/login" />
 		<property name="filters">
 			<map>
@@ -25,9 +25,9 @@
 			<value>
 				<!-- /admin/** = authc -->
 				/admin/login = anon
-				/manager/* = authc,myRoles[admin]
-				/usercenter/*
-				=authc,myRoles[user]
+				/user/login = anon
+				/manageradmin/* = authc,myRoles[admin]
+				/manageruser/*=authc,myRoles[user] 
 				<!-- /role/** = roles[admin] -->
 				<!-- /permission/** = perms[permssion:look] -->
 				<!-- /** = authc -->

@@ -1,5 +1,6 @@
 package com.vduty.cms.web.user.service;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,13 +14,13 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.druid.util.StringUtils;
-import com.vduty.cms.web.admin.entity.Admin;
-import com.vduty.cms.web.admin.service.AdminMgrService;
 import com.vduty.cms.web.shiro.utils.*;
 import com.vduty.cms.web.user.entity.User;
 import com.vduty.cms.web.user.service.UserMgrService;
 
 public class UserRealm extends AuthorizingRealm {
+	public static final Logger logger = Logger.getLogger(UserRealm.class);
+	
 	@Autowired
 	private UserMgrService userService;
 	
@@ -41,6 +42,7 @@ public class UserRealm extends AuthorizingRealm {
 //            addPermission(username,info);  
 //            addRole(username, info);  
             info.addRole("user");
+            logger.info(info.getRoles().iterator().next());
             return info;  
         }  
         return null;    
@@ -51,6 +53,7 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		System.out.println("exe UserRealm");
+		
 		User user = null;
 		
 		// 1. 把AuthenticationToken转换为CustomizedToken

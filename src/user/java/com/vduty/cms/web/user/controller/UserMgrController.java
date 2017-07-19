@@ -24,15 +24,15 @@ import com.vduty.cms.web.utils.MD5Utils;
  *
  */
 @Controller
-@RequestMapping("/usercenter")
+@RequestMapping("/manageruser/user")
 public class UserMgrController extends BaseController{
 	
 	@RequestMapping
-	public String showAdminMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,
+	public String showUserMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap){
 		modelMap.put("active_admin", "active");
 		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
-		return "user/userMgr/main";
+		return "/user/userMgr/main";
 	}
 	
 	/**

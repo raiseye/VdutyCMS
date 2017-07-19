@@ -59,4 +59,7 @@ public interface AdminDAO {
 	
 	public int updateAdminPwdById(@Param("id") long adminId, @Param("pwd") String pwd);
 	
+	public int savaWebRunLog(@Param("log") String log);
+	
+	
 }

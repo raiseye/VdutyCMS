@@ -18,7 +18,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -51,7 +51,14 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		
 		</dependency>
+		
+		<dependency>  
+    <groupId>org.springframework</groupId>  
+    <artifactId>spring-context-support</artifactId>  
+    <version>${org.springframework-version}</version>  
+</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -68,7 +75,7 @@
 			<artifactId>spring-expression</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -99,7 +106,7 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -212,31 +219,31 @@
 			<artifactId>aopalliance</artifactId>
 			<version>1.0</version>
 		</dependency>
-		
+
 		<!-- shiro -->
-		<dependency>  
-    		<groupId>org.apache.shiro</groupId>  
-    		<artifactId>shiro-core</artifactId>  
-    		<version>1.2.3</version>  
-		</dependency>  
-		<dependency>  
-    		<groupId>org.apache.shiro</groupId>  
-    		<artifactId>shiro-web</artifactId>  
-    		<version>1.2.3</version>   
-		</dependency>  
-		<dependency>  
-    		<groupId>org.apache.shiro</groupId>  
-    		<artifactId>shiro-ehcache</artifactId>  
-    		<version>1.2.3</version>  
-		</dependency>  
-		<dependency>  
-    		<groupId>org.apache.shiro</groupId>  
-    		<artifactId>shiro-spring</artifactId>  
-    		<version>1.2.3</version>  
-		</dependency>  
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 		<!-- shiro end -->
-		
-		
+
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -244,6 +251,18 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

@@ -40,5 +40,9 @@
 	<update id="updateAdminPwdById">
 		UPDATE admin SET password=#{pwd} WHERE id=#{id}
 	</update>
+	
+	<insert id="savaWebRunLog" parameterType="String" >
+	 insert into weblog(log) values(#{log});
+	</insert>
 
 </mapper>

@@ -44,7 +44,7 @@ public class AdminRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();  
 //            addPermission(username,info);  
 //            addRole(username, info);  
-            //info.addRole("admin");
+            info.addRole("admin");
             //System.out.println("AuthorizationInfo info role "+info.getRoles().iterator().next().toString());
             
             return info;  
