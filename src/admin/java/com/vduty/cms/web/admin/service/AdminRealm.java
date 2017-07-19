@@ -43,7 +43,8 @@ public class AdminRealm extends AuthorizingRealm {
         if(!StringUtils.isEmpty(username)){  
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();  
 //            addPermission(username,info);  
-//            addRole(username, info);  
+//            addRole(username, info); 
+            //登录成功，设置该用户的角色
             info.addRole("admin");
             //System.out.println("AuthorizationInfo info role "+info.getRoles().iterator().next().toString());
             
