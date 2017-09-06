@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vduty.cms.web.user.dao.ItemMainDAO">
+
+	<resultMap type="com.vduty.cms.web.user.entity.ItemMain" id="ItemMainResultMap">	
+		<result property="title" column="title" />
+		<result property="userId" column="user_id" />
+		<result property="querySql" column="query_sql" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<resultMap type="com.vduty.cms.web.user.entity.ItemDefine" id="ItemDefineResultMap">	
+		<result property="itemId" column="item_id" />
+		<result property="fieldName" column="field_name" />
+		<result property="fieldMeaning" column="field_meaning" />
+		<result property="dataType" column="data_type" />
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+	</resultMap>
+
+	<!-- 执行多条语句事例 <delete id="deleteUserById" parameterType="String"> delete 
+		from sec_user_role where userId=#{id}; delete from sec_user where id=#{id}; 
+		</delete> -->
+
+	<insert id="addItem" parameterType="com.vduty.cms.web.user.entity.ItemMain"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		item_main(title,user_id,query_sql)
+		values(#{title},#{userId},#{querySql})
+	</insert>
+
+	<insert id="addItemDefine" parameterType="list">
+		insert into
+		item_define(item_id,field_name,field_meaning,unit,data_type)
+		values
+		<foreach collection="list" index="index" item="itemDefine"
+			separator=",">
+			(#{itemDefine.itemId,jdbcType=INTEGER},#{itemDefine.fieldName,jdbcType=VARCHAR},
+			#{itemDefine.fieldMeaning,jdbcType=VARCHAR},#{itemDefine.unit,jdbcType=VARCHAR},
+			#{itemDefine.dataType,jdbcType=INTEGER} )
+		</foreach>
+	</insert>
+
+	<select id="getItemMainList" parameterType="long"
+		resultType="com.vduty.cms.web.user.entity.ItemMain" resultMap="ItemMainResultMap">
+		select * from item_main where user_id = #{userId}
+	</select>
+	
+	<select id="itemDefineList" parameterType="long"
+		resultType="com.vduty.cms.web.user.entity.ItemDefine"   resultMap="ItemDefineResultMap" >
+		select * from item_define where item_id = #{itemId}
+	</select>
+	
+	<select id="getItem" parameterType="long"
+		resultType="com.vduty.cms.web.user.entity.ItemMain" >
+		select * from item_main where id = #{itemId}
+	</select>
+	
+	<delete id="deleteItem" parameterType="long">
+		DELETE FROM item_main WHERE id=#{id}
+	</delete>
+
+
+</mapper>
+

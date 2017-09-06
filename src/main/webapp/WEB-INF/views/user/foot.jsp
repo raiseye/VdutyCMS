@@ -1,29 +1,17 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+
 </div>
 <!-- pagegroup end -->
-<script type='text/javascript'
-	src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript'
-	src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript'
-	src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js'
-	charset='utf-8'></script>
-<script>
-	$.init();
-</script>
-
 
 
 </body>
+  <script  src="/public/lib/sui/sm.js" charset='utf-8' ></script>
+  <script src="/public/lib/sui/sm-extend.js" charset='utf-8'></script>
+
 <script>
-	$(document).ready(function() {
-		$("#${menu_active}").addClass("active");
-
-	});
-
-	//操作表
-	$(document).ready(function() {
-
+$(function(){
+	 $(document).on("pageInit", "#page_main", function(e, id, page) {
+	
 		$("#aUsername").click(function() {
 
 			var buttons1 = [ {
@@ -57,5 +45,7 @@
 			$.actions(groups);
 		});
 	});
+	$.init();
+});
 </script>
 </html>

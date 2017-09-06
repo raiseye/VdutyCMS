@@ -14,7 +14,7 @@
 	         	">
 
 
-	<!-- 自动扫描该基础包下的所有类，并自动装配成bean :com.vduty.cms.web-->
+	<!-- 自动扫描该基础包下的所有类，并自动装配成bean :com.vduty.cms.web -->
 	<context:component-scan base-package="com.vduty.cms" />
 	<!-- 通过注解，把URL映射到Controller上，该标签默认注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
 	<mvc:annotation-driven />
@@ -32,7 +32,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<!-- 映射静态资源，防止被Controller拦截 -->
-	<mvc:resources mapping="/res/**" location="/res/" />
+	<mvc:resources mapping="/public/**" location="/public/" />
 	<mvc:resources mapping="/upload/**" location="/upload/"
 		cache-period="31556926" />
 	<mvc:resources location="/error/" mapping="/error/**" />
@@ -44,6 +44,24 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
 	</bean>
 
 

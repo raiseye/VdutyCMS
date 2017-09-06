@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vduty.cms.web.controller.BaseController;
+import com.vduty.cms.web.admin.controller.AdminBaseController;
 import com.vduty.cms.web.admin.entity.Admin;
 import com.vduty.cms.web.admin.entity.vo.JsonVo;
 import com.vduty.cms.web.admin.exception.ValidateException;
@@ -25,7 +26,7 @@ import com.vduty.cms.web.utils.MD5Utils;
  */
 @Controller
 @RequestMapping("/manageradmin/admin")
-public class AdminMgrController extends BaseController{
+public class AdminMgrController extends AdminBaseController{
 	
 	@RequestMapping
 	public String showAdminMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,

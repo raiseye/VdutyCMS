@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/admin/java/com/vduty/cms/web/admin/entity/vo/PageVo.java=UTF-8
 encoding//src/main/java/com/vduty/cms/web/utils/MD5Utils.java=gbk
+encoding//src/main/webapp/WEB-INF/views/common/taglibs.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user/foot.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user/headerbar.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/user/mainmenu.jsp=UTF-8

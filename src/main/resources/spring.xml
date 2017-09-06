@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- xmlns：意思是 xml name space。这表示默认命名空间
+而 xmlns:xsi 相当于 默认命名空间的一个属性。
+而 xsi:schemaLocation ，应该是xsi的一个属性了。
+而在 xsi:schemaLocation中的引用，都是成对存在的。 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -25,11 +28,12 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean class="com.vduty.cms.web.utils.ApplicationContextHandle" lazy-init="false"/>  
+	<!-- quartz config  begin -->
 	<bean id="jobFactory" class="com.vduty.cms.quartz.utils.MyJobFactory"></bean>
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
         <property name="jobFactory" ref="jobFactory"></property>  
     </bean>  
-	
+	<!-- quartz config  end -->
 	<!-- 自动扫描该基础包下的所有类，并自动装配成bean -->
 	<context:component-scan base-package="com.vduty.cms.web" />
 	<!-- 装载相关配置文件 -->
@@ -71,9 +75,5 @@
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 		<property name="basePackage" value="com.vduty.cms.web" />
 	</bean>
-
-	
-
-
 
 </beans>

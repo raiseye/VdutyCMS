@@ -10,6 +10,8 @@ import com.vduty.cms.web.admin.entity.Admin;
 import com.vduty.cms.web.admin.entity.vo.JsonVo;
 import com.vduty.cms.web.admin.exception.ValidateException;
 import com.vduty.cms.web.constant.SystemConstant;
+import com.vduty.cms.web.user.entity.RequestJsonResult;
+import com.vduty.cms.web.utils.JsonUtils;
 import com.vduty.cms.web.admin.service.AdminMgrService;
 
 @Controller
@@ -46,5 +48,19 @@ public class BaseController {
 		Admin admin = (Admin) request.getSession().getAttribute(
 				SystemConstant.SESSION_ADMIN);
 		return admin;
+	}
+	/**
+	 * 返回json
+	 * @param errcode
+	 * @param msg
+	 * @return
+	 */
+	protected String returnJsonResult(Integer errcode,String msg)
+	{
+		RequestJsonResult result = new RequestJsonResult(errcode,msg);
+		String re = "";
+		re = JsonUtils.toJsonStr(result);
+		return re;
+		
 	}
 }

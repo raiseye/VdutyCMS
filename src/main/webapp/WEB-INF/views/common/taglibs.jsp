@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -7,3 +8,7 @@
 <c:set var="main_ctx" value="${pageContext.request.contextPath}/res/main" />
 <c:set var="upload_pic_ctx" value="${pageContext.request.contextPath}/upload" />
 <c:set var="cur_user" value="${sessionScope.currentUser}" />
+<c:set var="headerbar_back" value='<a id="headerbar_back" class="button button-link  pull-left" href="javascript:history.go(-1)"
+		data-transition="slide-out">返回</a>'/>
+<c:set var="headerbar_title" value="标题" />
+<c:set var="headerbar_right" value="设置" />

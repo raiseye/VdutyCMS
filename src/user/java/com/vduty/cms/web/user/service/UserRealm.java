@@ -1,6 +1,7 @@
 package com.vduty.cms.web.user.service;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,12 +19,23 @@ import com.vduty.cms.web.shiro.utils.*;
 import com.vduty.cms.web.user.entity.User;
 import com.vduty.cms.web.user.service.UserMgrService;
 
+
+/**
+ *  1:  doGetAuthorizationInfo()方法可以理解为是权限验证，
+
+    2: doGetAuthenticationInfo(  AuthenticationToken token)  理解为登陆验证。
+ * @author yeluxing
+ *
+ */
 public class UserRealm extends AuthorizingRealm {
 	public static final Logger logger = Logger.getLogger(UserRealm.class);
 	
 	@Autowired
 	private UserMgrService userService;
 	
+/**
+ * 权限校验
+ */
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -50,6 +62,9 @@ public class UserRealm extends AuthorizingRealm {
 		
 	}
 
+	/**
+	 * 登录校验
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		System.out.println("exe UserRealm");
@@ -59,16 +74,17 @@ public class UserRealm extends AuthorizingRealm {
 		// 1. 把AuthenticationToken转换为CustomizedToken
 		CustomizedToken customizedToken = (CustomizedToken) token;
 		// customizedToken.getLoginType();
-		// 2. 从CustomizedToken中获取email
+		// 2. 从CustomizedToken中获取email／username
 		String email = customizedToken.getUsername();
 		
 			System.out.println("exe UserRealm user");
 			// 3. 若用户不存在，抛出UnknownAccountException异常
 			user = userService.getUserByName(email);
-			if (user == null)
-				
+			if (user == null)				
 				throw new UnknownAccountException("用户不存在！");
 			
+			//保存用户的信息
+			SecurityUtils.getSubject().getSession().setAttribute("userId", user.getId());
 			
 			// 4.
 			// 根据用户的情况，来构建AuthenticationInfo对象并返回，通常使用的实现类为SimpleAuthenticationInfo

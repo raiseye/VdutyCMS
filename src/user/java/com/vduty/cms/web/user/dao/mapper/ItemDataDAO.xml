@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vduty.cms.web.user.dao.ItemDataDAO">
+	<insert id="addItemData" parameterType="String"  useGeneratedKeys="true" keyProperty="id">
+	${_parameter}
+	</insert>
+
+	<select id="getItemData" parameterType="String"  resultType="Map">
+	${_parameter}
+	<!-- SET @sql1= #{value};
+	PREPARE stmt1 FROM @sql1;
+EXECUTE stmt1;
+DEALLOCATE PREPARE stmt1 ; -->
+		
+	</select>
+<!-- 	
+	
+	<select id="getItem" parameterType="long"
+		resultType="com.vduty.cms.web.user.entity.ItemData" >
+		select * from item_data where id = #{itemId}
+	</select>
+	
+	<delete id="deleteItem" parameterType="long">
+		DELETE FROM item_data WHERE id=#{id}
+	</delete>
+ -->
+
+</mapper>
+

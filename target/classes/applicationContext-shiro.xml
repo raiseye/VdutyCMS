@@ -26,8 +26,8 @@
 				<!-- /admin/** = authc -->
 				/admin/login = anon
 				/user/login = anon
-				/manageradmin/* = authc,myRoles[admin]
-				/manageruser/*=authc,myRoles[user] 
+				/manageradmin/** = authc,myRoles[admin]
+				/manageruser/**=authc,myRoles[user] 
 				<!-- /role/** = roles[admin] -->
 				<!-- /permission/** = perms[permssion:look] -->
 				<!-- /** = authc -->

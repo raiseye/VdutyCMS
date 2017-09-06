@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.vduty.cms.web.controller.BaseController;
 import com.vduty.cms.web.shiro.utils.CustomizedToken;
 import com.vduty.cms.web.shiro.utils.LoginType;
+import com.vduty.cms.web.admin.controller.AdminBaseController;
 import com.vduty.cms.web.admin.entity.Admin;
 import com.vduty.cms.web.admin.entity.vo.JsonVo;
 import com.vduty.cms.web.utils.MD5Utils;
@@ -24,7 +25,7 @@ import com.vduty.cms.web.utils.MD5Utils;
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminController extends BaseController{    
+public class AdminController extends AdminBaseController{    
 	
 	/**
 	 * 登录
