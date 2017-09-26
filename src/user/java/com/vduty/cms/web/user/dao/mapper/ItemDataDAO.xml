@@ -15,6 +15,10 @@ EXECUTE stmt1;
 DEALLOCATE PREPARE stmt1 ; -->
 		
 	</select>
+	<delete id="deleteItemData" parameterType="long">
+	 delete from item_data where id =#{id}
+	</delete>
+	
 <!-- 	
 	
 	<select id="getItem" parameterType="long"

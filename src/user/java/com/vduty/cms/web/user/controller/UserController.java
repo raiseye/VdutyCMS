@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.util.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,11 +39,13 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/login")
-	public String showLoginView(HttpServletRequest request, HttpServletResponse response) {
+	public String showLoginView(HttpServletRequest request, HttpServletResponse response,ModelMap modelMap) {
 
 		// System.out.println(org.apache.shiro.web.util.WebUtils.getSavedRequest(request).getRequestUrl());
-		SavedRequest sr = org.apache.shiro.web.util.WebUtils.getSavedRequest(request);
+		SavedRequest sr = org.apache.shiro.web.util.WebUtils.getSavedRequest(request);//获取原来要访问的网站
 		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+	
+		modelMap.put("title_name","用户登录");
 		if (sr != null) {
 			String saveUrl = sr.getRequestUrl();
 			
@@ -51,12 +54,16 @@ public class UserController extends BaseController {
 //			System.out.println(basePath+"/manageradmin/admin");
 			if (saveUrl != null && !saveUrl.equals("")) {				
 				System.out.println(saveUrl.indexOf("/manageruser/user"));
-				if (saveUrl.indexOf("/manageruser/user") == 0) {
-					return "user/login";
+				if (saveUrl.indexOf("/manageruser/user") >= 0) {
+					
+				
+					
+					return "user/login";//返回用户的登录view
 				}
 				System.out.println(saveUrl.indexOf("/manageradmin/admin"));
-				if (saveUrl.indexOf("/manageradmin/admin") == 0) {
-					return "admin/login";
+				if (saveUrl.indexOf("/manageradmin/admin") >= 0) {
+				
+					return "admin/login";//返回管理员的view
 				}
 			}
 		}
@@ -65,6 +72,7 @@ public class UserController extends BaseController {
 			System.out.println("refer url is null!");
 		}
 
+		
 		return "user/login";
 	}
 

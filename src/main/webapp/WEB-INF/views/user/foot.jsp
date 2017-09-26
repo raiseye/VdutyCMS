@@ -4,9 +4,10 @@
 <!-- pagegroup end -->
 
 
+ <script  src="/public/lib/sui/sm.min.js" charset='utf-8' ></script>
+  <script src="/public/lib/sui/sm-extend.min.js" charset='utf-8'></script>
 </body>
-  <script  src="/public/lib/sui/sm.js" charset='utf-8' ></script>
-  <script src="/public/lib/sui/sm-extend.js" charset='utf-8'></script>
+ 
 
 <script>
 $(function(){

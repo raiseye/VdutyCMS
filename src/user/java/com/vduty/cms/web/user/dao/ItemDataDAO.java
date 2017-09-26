@@ -45,7 +45,7 @@ public interface ItemDataDAO {
 	 * @param itemid
 	 * @return
 	 */
-	//public int deleteItem(long id);
+	public int deleteItemData(long id);
 	
 	
 	

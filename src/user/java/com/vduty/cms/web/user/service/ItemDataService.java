@@ -38,6 +38,11 @@ public class ItemDataService {
 		return itemDAO.getItemData(sql);
 	}
 	
+	public int deleteItemData(long id)
+	{
+		 return itemDAO.deleteItemData(id);
+	}
+	
 
 	
 }

@@ -54,10 +54,7 @@
 			$(".liitem").click(function(){
 				 var itemId = this.id.replace("li_","");
 				 console.log(itemId);
-				 location.href="/manageruser/user/item/add/"+itemId;
-				 
-				 
-				
+				 location.href="/manageruser/user/item/add/"+itemId;		
 			});
 			
 			

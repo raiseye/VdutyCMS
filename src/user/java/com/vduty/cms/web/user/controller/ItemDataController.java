@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +39,12 @@ import com.vduty.cms.web.user.service.ItemDataService;
 import com.vduty.cms.web.user.service.ItemMainService;
 import com.vduty.cms.web.user.service.UserMgrService;
 import com.vduty.cms.web.user.service.UserRealm;
+import com.vduty.cms.web.utils.JsonDateValueProcessor;
 import com.vduty.cms.web.utils.JsonUtils;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 /**
  * 任务管理
@@ -90,6 +94,16 @@ public class ItemDataController extends UserBaseController {
 			String sql = sb.toString();
 			logger.info("sql: " + sql);
 			List<Map> sourceItemDefineList = itemDataService.getItemData(sql);
+			
+			//testjson
+			JsonConfig jsonConfig = new JsonConfig();  
+			jsonConfig.registerJsonValueProcessor(Date.class , new JsonDateValueProcessor()); 
+			
+			JSONArray json = JSONArray.fromObject(sourceItemDefineList,jsonConfig); 
+			
+			System.out.println(json.toString());
+			//testjson end;
+			
 			logger.info("item_data_map_len:" + sourceItemDefineList.size());
 
 			List<ItemDefine> definelist = itemMainService.itemDefineList(itemMainId);
@@ -104,13 +118,20 @@ public class ItemDataController extends UserBaseController {
 			// select * from item_data where item_id=" + itemMainId);
 
 			List<Map<String, Object>> itemDataList = new ArrayList<Map<String, Object>>();
-
-			for (Map<String, Object> map : sourceItemDefineList) {
+            StringBuilder dateSb = new StringBuilder();
+            
+            
+			for (Map<String, Object> map : sourceItemDefineList) {//记录循环
 				Map<String, Object> itemDataMap = new HashMap<String, Object>();
-				for (Map.Entry<String, Object> entry : map.entrySet()) {
+				StringBuilder nSb = new StringBuilder("[");
+				for (Map.Entry<String, Object> entry : map.entrySet()) {//字段循环
+					
+				
 					String newKey = "";
 					if (entry.getKey().equals("execute_datetime")) {
 						newKey = "记录时间";
+						
+						
 					} else if (entry.getKey().equals("create_time")) {
 						newKey = "创建时间";
 					} else if (entry.getKey().equals("id")) {
@@ -122,7 +143,8 @@ public class ItemDataController extends UserBaseController {
 					}
 					
 					if (newKey != null) {
-						itemDataMap.put(newKey, entry.getValue());
+						itemDataMap.put(newKey, entry.getValue());		
+						
 					}
 
 					System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
@@ -142,8 +164,11 @@ public class ItemDataController extends UserBaseController {
 			}
 			modelMap.put("list", itemDataList);
 			modelMap.put("title_name", "记录报表");
-			
+		    modelMap.put("json",json);
+		    modelMap.put("meaning",JSONArray.fromObject(fielsMeaningMap) );
 			return "/user/userMgr/itemreport";
+			
+			
 		}
 		else
 			
@@ -176,6 +201,13 @@ public class ItemDataController extends UserBaseController {
 		while (params.hasMoreElements()) {
 			String name = params.nextElement();
 			fields.append(name);
+			
+			if ("execute_datetime".equals(name))
+			{
+				values.append("'" + request.getParameter(name)+"'");
+			}
+			else
+			
 			values.append(request.getParameter(name));
 
 			fields.append(",");
@@ -194,7 +226,7 @@ public class ItemDataController extends UserBaseController {
 		sb.append(values);
 
 		String addsql = sb.toString();
-
+         logger.info(addsql);
 		System.out.println(addsql);
 
 		itemDataService.addItem(addsql);
@@ -203,5 +235,19 @@ public class ItemDataController extends UserBaseController {
 		modelMap.put("message", "保存记录成功" + paramlist);
 		return "/user/resultwindow";
 	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, value = "/item/deletedata/{id}")
+	public String deleteDataItem(@PathVariable int id,ModelMap modelMap)
+	{
+		
+		int reusult = itemDataService.deleteItemData(id);
+		if (reusult>0)
+		return this.returnJsonResult(1, "成功");
+		else
+			return  this.returnJsonResult(10004, "失败");
+	}
+	
+	
 
 }
