@@ -29,13 +29,38 @@ import com.vduty.cms.web.utils.MD5Utils;
 public class PlanController extends BaseController{
 	
 	@RequestMapping("/plan")
-	public String showUserMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,
+	public String showPlans(@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap){
 		
-		Subject subject = SecurityUtils.getSubject();
-		modelMap.put("title_name",subject.getPrincipal());
+		Subject subject = SecurityUtils.getSubject();//用户名称
+		modelMap.put("title_name","计划");
+		
+		
 		return "/user/userMgr/plan";
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/plan/add")
+	public String addPlan()
+	{
+		
+		return "/user/userMgr/addplan";
+	}
+	
+	//添加保存
+	@RequestMapping("/plan/addsave")
+	public String addSave()
+	{
+		
+		return "/user/userMgr/addplan";
+	}
+	
+	
+	
+	
 	
 	
 }
