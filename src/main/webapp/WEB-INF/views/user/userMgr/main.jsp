@@ -2,9 +2,11 @@
 <%@ include file="/WEB-INF/views/common/taglibs.jsp"%>
 <c:set var="menu_active" value="nav_membercenter" />
 <%@ include file="/WEB-INF/views/user/head.jsp"%>
+<c:set var="headerbar_back"
+	value=""/>
 <c:set var="headerbar_right"
 	value='<a  id="submita" class="button button-link button-nav pull-right" href="/user/logout">退出</a>' />
-<c:set var="headerbar_title" value="${curUser}${userId}" />
+<c:set var="headerbar_title" value="${curUser}" />
 
 <div class="page" id="page_main">
 	<%@ include file="/WEB-INF/views/user/headerbar.jsp"%>
@@ -18,11 +20,11 @@
 					<li>
 						<div class="item-content">
 							<div class="item-media">
-								<img src="/public/images/u=1463646346,1819797247&fm=21&gp=0.jpg" width="44">
+								<img src="${pageContext.request.contextPath}/public/images/u=1463646346,1819797247&fm=21&gp=0.jpg" width="44">
 							</div>
 							<div class="item-inner">
 								<div class="item-title-row">
-									<div class="item-title"><shiro:principal /></div>
+									<div class="item-title"><shiro:principal />_${userId}</div>
 								</div>
 								<div class="item-subtitle">一群有趣的人做有性趣的事</div>
 							</div>
@@ -63,7 +65,7 @@
 						<div class="item-title" style="font-size: 0.7rem;">我的发言</div>
 					</div>
 			</a></li>
-			<li><a href="/manageruser/user/plan" class="item-link item-content">
+			<li><a href="${pageContext.request.contextPath}/manageruser/user/plan" class="item-link item-content">
 					<div class="item-media">
 						<span class="icon icon-clock"
 							style="font-size: 0.9rem; color: #0894ec;"></span>
@@ -76,7 +78,7 @@
 					</div>
 			</a></li>
 			
-			<li><a href="/manageruser/user/item" class="item-link item-content">
+			<li><a href="${pageContext.request.contextPath}/manageruser/user/item" class="item-link item-content">
 					<div class="item-media">
 						<span class="icon icon-clock"
 							style="font-size: 0.9rem; color: #0894ec;"></span>

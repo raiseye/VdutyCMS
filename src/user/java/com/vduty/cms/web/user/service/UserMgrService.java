@@ -3,6 +3,7 @@ package com.vduty.cms.web.user.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import com.vduty.cms.web.utils.MD5Utils;
 @Service
 public class UserMgrService {
 
+	public static final Logger logger = Logger.getLogger(UserMgrService.class);
 	@Autowired
 	private UserDAO userDAO;
 
@@ -42,7 +44,8 @@ public class UserMgrService {
 		try {
 			 user = userDAO.getUserByName(name);
 		} catch (Exception e) {
-			System.out.print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+e.getMessage());
+			logger.error(e.getMessage());
+			
 		}
 		return user;
 	}

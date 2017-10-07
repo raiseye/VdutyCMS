@@ -20,21 +20,20 @@ import com.vduty.cms.web.constant.SystemConstant;
 import com.vduty.cms.web.utils.MD5Utils;
 
 /**
- * 管理员管理
- * @author lee
+ *
  *
  */
 @Controller
 @RequestMapping("/manageruser/user")
 public class DiscoverController extends BaseController{
-	
-	@RequestMapping("/message")
+	@RequestMapping("/discover")
 	public String showUserMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap){
-		
+		modelMap.put("active_admin", "active");
+		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
 		Subject subject = SecurityUtils.getSubject();
 		modelMap.put("title_name",subject.getPrincipal());
-		return "/user/userMgr/message";
+		return "/user/userMgr/discover";
 	}
 	
 	

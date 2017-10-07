@@ -2,6 +2,7 @@ package com.vduty.cms.web.shiro.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -20,7 +21,7 @@ import org.apache.shiro.util.CollectionUtils;
  * 并且，他们不能相互包含，例如，处理普通用户验证的Realm的全类名中不应该包含字符串"Admin"。
  */
 public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticator {
-
+	 private  final Logger logger = Logger.getLogger(this.getClass());
 	 private Map<String, Object> definedRealms;
 
 	    /**
@@ -36,6 +37,7 @@ public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticat
 	    @Override
 	    protected AuthenticationInfo doSingleRealmAuthentication(Realm realm,AuthenticationToken token) {
 
+	    	
 	        // 如果该realms不支持(不能验证)当前token
 	        if (!realm.supports(token)) {
 	            throw new ShiroException("token错误!");
@@ -48,6 +50,7 @@ public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticat
 	                throw new ShiroException("token不存在!");
 	            }
 	        } catch (Exception e) {
+	        	logger.error(this.getClass() + ":用户名或者密码错误!");
 	            throw new ShiroException("用户名或者密码错误!");
 	        }
 	        return info;

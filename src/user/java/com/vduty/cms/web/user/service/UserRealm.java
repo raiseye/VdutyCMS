@@ -63,6 +63,7 @@ public class UserRealm extends AuthorizingRealm {
 	}
 
 	/**
+	 * 用户登陆处理
 	 * 登录校验
 	 */
 	@Override
@@ -75,6 +76,7 @@ public class UserRealm extends AuthorizingRealm {
 		CustomizedToken customizedToken = (CustomizedToken) token;
 		// customizedToken.getLoginType();
 		// 2. 从CustomizedToken中获取email／username
+		org.apache.ibatis.logging.LogFactory.useLog4JLogging();
 		String email = customizedToken.getUsername();
 		
 			System.out.println("exe UserRealm user");

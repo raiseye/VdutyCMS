@@ -41,6 +41,8 @@ public class UserController extends BaseController {
 	@RequestMapping("/login")
 	public String showLoginView(HttpServletRequest request, HttpServletResponse response,ModelMap modelMap) {
 
+		logger.info("user login");
+		logger.error("user login errorlogtest");
 		// System.out.println(org.apache.shiro.web.util.WebUtils.getSavedRequest(request).getRequestUrl());
 		SavedRequest sr = org.apache.shiro.web.util.WebUtils.getSavedRequest(request);//获取原来要访问的网站
 		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
@@ -71,8 +73,7 @@ public class UserController extends BaseController {
 		{
 			System.out.println("refer url is null!");
 		}
-
-		
+		System.out.println(this.getClass());	
 		return "user/login";
 	}
 
@@ -88,12 +89,14 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/login/validate", method = RequestMethod.POST)
 	public JsonVo<Admin> userLogin(@RequestParam("name") String name, @RequestParam("password") String password,
 			RedirectAttributes attr) {
+		org.apache.ibatis.logging.LogFactory.useLog4JLogging();
 		JsonVo<Admin> result = new JsonVo<Admin>();
 		try {
 			// org.apache.shiro.subject,
 			SecurityUtils.getSubject()
 					.login(new CustomizedToken(name, MD5Utils.encrypt(password), LoginType.USER.toString()));
 			result.setResult(true);
+			
 			return result;
 		} catch (AuthenticationException e) {
 			result.setMsg("user's name or passwrod error!");
