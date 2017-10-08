@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.vduty.cms.web.controller.BaseController;
 import com.vduty.cms.web.user.entity.Plan;
 import com.vduty.cms.web.user.service.PlanService;
+import com.vduty.cms.web.utils.DatetimeUtils;
 
 /**
  * 任务管理
@@ -56,13 +57,32 @@ public class PlanController extends BaseController{
 	@RequestMapping(method = RequestMethod.POST, value ="/plan/addsave")
 	public String addSave(HttpServletRequest request, ModelMap modelMap)
 	{
-		logger.debug("正要添加计划："+request.getParameter("title") );
+		logger.info("正要添加计划："+request.getParameter("title") );
 		
 		Plan plan = new Plan();
-		plan.setTitle(request.getParameter("title"));
+	    String alarmTypeStr = "0";
+	    int alarmType = 0;
+		if (request.getParameter("alarmType")!=null)
+		{
+			alarmTypeStr  = request.getParameter("alarmType");	
+			alarmType = Integer.parseInt( alarmTypeStr.substring(0, 1));			
+		}
+		logger.info(alarmTypeStr);
+		String title = request.getParameter("title");
+		plan.setTitle(title);
+		logger.info( "doTime:"+request.getParameter("doTime"));
+		plan.setDoTime( DatetimeUtils.strToDate( request.getParameter("doTime"),"yyyy-MM-dd HH:mm:ss"));
+		plan.setAlarmType( alarmType);
+		int repeatType = Integer.parseInt( request.getParameter("repeatType").substring(0,1));
+		
+		plan.setRepeatType(repeatType);
+	    plan.setRepeatWeaks( request.getParameter("repeatWeaks"));
+	    long userId = Long.parseLong( SecurityUtils.getSubject().getSession().getAttribute("userId").toString());
+	    plan.setUserId(userId);	    
+		plan.setRepeatType(repeatType);		
 		planService.addItem(plan);
-		modelMap.put("title", "");
-		modelMap.put("title_name", "保存成功");
+		modelMap.put("title_name", title);
+		
 		modelMap.put("message", "保存记录成功" + plan.getTitle());
 		return "/user/resultwindow";
 	}

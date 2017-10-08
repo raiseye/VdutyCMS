@@ -1,5 +1,5 @@
 <!-- 计划添加-->
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
 <%@ include file="/WEB-INF/views/common/taglibs.jsp"%>
 <%@ include file="/WEB-INF/views/user/head.jsp"%>
 <c:set var="headerbar_right"
@@ -45,18 +45,27 @@
 							<div class="item-inner">
 								<div class="item-title label">重复类型</div>
 								<div class="item-input">
-									<input id="repeatType" class="input" name="repeatType" type="text" placeholder="选择类型" readonly />
+									<input id="repeatType" class="input" name="repeatType" type="text" placeholder="选择重复类型" readonly />
 
 								</div>
 								<div class="item-media"></div>
 							</div>
 
-						</div>
-<div class="list-block media-list " id="weeklist" style="display:none;">
-      <ul>
-        <li>
+
+						</div>	
+						
+	 <div id="weeklist"  style="display:none;">
+     <nav class="bar bar-nav bar-standard">
+  <h1 class="title">重复</h1>
+  <a id="weeklistclose" class="button  pull-right" >
+     <span class="icon icon-check" ></span></a>
+</nav>
+   
+     
+      <ul >     
+        <li>                 
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox"  name="checkboxWeek0">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期一
@@ -65,7 +74,7 @@
         </li>
         <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox1">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期二
@@ -74,7 +83,7 @@
         </li>
          <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox2">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期三
@@ -83,7 +92,7 @@
         </li>
          <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox3">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期四
@@ -92,7 +101,7 @@
         </li>
          <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox4">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期五
@@ -101,7 +110,7 @@
         </li>
          <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox5">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期六
@@ -110,7 +119,7 @@
         </li>
          <li>
           <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
+            <input type="checkbox" name="checkbox6">
             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
             <div class="item-inner">
              星期日
@@ -120,6 +129,7 @@
         
       </ul>
     </div>
+
 						
 
 					</li>
@@ -134,7 +144,7 @@
 							<div class="item-inner">
 								<div class="item-title label">提醒类型</div>
 								<div class="item-input">
-									<input id="alarmType" class="input"  name="alarmType" type="text" placeholder="选择类型" readonly />
+									<input id="alarmType" class="input"  name="alarmType" type="text" placeholder="选择提醒类型" readonly />
 
 								</div>
 								<div class="item-media"></div>
@@ -203,7 +213,7 @@
 function checkSelect()
 {
 	console.log($("#repeatType").val());
-	if ($("#repeatType").val()=="每周")
+	if ($("#repeatType").val().indexOf("每周")>0)
 		{
 		$("#weeklist").show("slowly");
 		}
@@ -224,6 +234,14 @@ function checkSelect()
 						"#page_main",
 						function(e, id, page) {
 
+											
+							$("#weeklistclose").click(function(){
+								
+								$("#weeklist").hide();
+								
+							})	;											
+							
+							
 							
 							
 							$("#datetime-picker")
@@ -238,8 +256,8 @@ function checkSelect()
 												toolbarTemplate : '<header class="bar bar-nav">\<button  class="button button-link pull-left">\</button>\<button class="button button-link pull-right close-picker" onclick="checkSelect()">\确定\</button>\<h1 class="title">重复类型</h1>\</header>',
 												cols : [ {
 													textAlign : 'center',
-													values : [ '每天', '每月',
-															'每年', '每周' ],
+													values : [ '1.每天', '2.每月',
+															'3.每年', '4.每周' ],
 													cssClass : 'picker-items-col-normal'
 												} ]
 											});
@@ -250,8 +268,8 @@ function checkSelect()
 												toolbarTemplate : '<header class="bar bar-nav">\<button class="button button-link pull-left">\</button>\<button class="button button-link pull-right close-picker">\确定\</button>\<h1 class="title">重复类型</h1>\</header>',
 												cols : [ {
 													textAlign : 'center',
-													values : [ '提醒一次', '提醒三次',
-															'直到确认' ],
+													values : [ '1.提醒一次', '2.提醒三次',
+															'3.直到确认' ],
 													cssClass : 'picker-items-col-normal'
 												} ]
 											});
@@ -273,11 +291,41 @@ function checkSelect()
 												var errtitle = "";
 												$('.input')
 														.each(
-																function(e) {
-																	console
-																			.log($(
-																					this)
-																					.val());
+																function(e) {																	
+																	
+																	var repeatWeeks="";
+																	try
+																	{
+																	console.log($(this).attr("name"));
+																	}
+																	catch(e)
+																	{
+																		console.log("get id error!")
+																	}
+																	if ($(this).attr("name") == "repeatType" &&  $(this).val().indexOf("每周")>0)
+																		{
+																		$("input[type='checkbox']").each(function(e){
+																			if ($(this).get(0).checked)
+																			repeatWeeks += $(this).attr("name").substr($(this).attr("name").length-1);
+																			
+																		}) ;
+																		
+																		console.log(repeatWeeks);
+																		if (repeatWeeks=="")
+																		{
+																		   $.toast("请选者重复的日期");
+																		   return false;
+																		}
+																		else
+																			{
+																			  $("#repeatWeaks").val(repeatWeeks);
+																			}
+																		}	
+																	
+																	
+																	$("#repeatWeeks").val(repeatWeeks);
+																												
+																	
 
 																	var thisdatatypeval = $(
 																			this)
@@ -295,6 +343,12 @@ function checkSelect()
 																				+ ",";
 
 																	}
+																	else
+																		{
+																		
+																		   console.log(thismeaning+":"+thisval);
+																		}
+																		
 
 																	if (thisdatatypeval != "undifine") {
 																		switch (thisval) {
@@ -323,6 +377,8 @@ function checkSelect()
 													});
 													return false;
 												}
+												
+												
 												$("#planform").submit();
 											});
 
