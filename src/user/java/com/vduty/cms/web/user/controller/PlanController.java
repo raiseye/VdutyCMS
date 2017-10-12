@@ -33,15 +33,23 @@ public class PlanController extends BaseController{
 	protected PlanService planService;
 	
 	@RequestMapping("/plan")
+<<<<<<< HEAD
 	public String getPlans(@RequestParam(value = "p", defaultValue = "0") int pageNum,
+=======
+	public String showPlans(@RequestParam(value = "p", defaultValue = "1") int pageNum,
+>>>>>>> aa6de6b9f8debe7effdf29fe2946c797a986608a
 			ModelMap modelMap){
 		
 		Subject subject = SecurityUtils.getSubject();//用户名称
 		modelMap.put("title_name","计划");
+<<<<<<< HEAD
 		long userId = Long.parseLong( SecurityUtils.getSubject().getSession().getAttribute("userId").toString());
 		List<Plan> plans = planService.getPlans(userId, pageNum, 20);
 		logger.info("plans:" + plans.size());
 		modelMap.put("planlist",plans);
+=======
+		
+>>>>>>> aa6de6b9f8debe7effdf29fe2946c797a986608a
 		
 		return "/user/userMgr/plan";
 	}
@@ -51,14 +59,20 @@ public class PlanController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/plan/add")
+<<<<<<< HEAD
 	public String addPlan(ModelMap modelMap)
 	{	
 		modelMap.put("title", "添加计划");
+=======
+	public String addPlan()
+	{
+>>>>>>> aa6de6b9f8debe7effdf29fe2946c797a986608a
 		
 		return "/user/userMgr/addplan";
 	}
 	
 	//添加保存
+<<<<<<< HEAD
 	@RequestMapping(method = RequestMethod.POST, value ="/plan/addsave")
 	public String addSave(HttpServletRequest request, ModelMap modelMap)
 	{
@@ -121,5 +135,18 @@ public class PlanController extends BaseController{
 		return "/user/userMgr/plan";		
 	}
 		
+=======
+	@RequestMapping("/plan/addsave")
+	public String addSave()
+	{
+		
+		return "/user/userMgr/addplan";
+	}
+	
+	
+	
+	
+	
+>>>>>>> aa6de6b9f8debe7effdf29fe2946c797a986608a
 	
 }
