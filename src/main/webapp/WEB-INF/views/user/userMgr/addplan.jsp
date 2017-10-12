@@ -162,9 +162,10 @@
 							<div class="item-inner">
 								<div class="item-title label">执行时间</div>
 								<div class="item-input">
-									<input type="text" class="datetime-picker input" name="doTime"
+									<input type="time" class="input " id="doTime" name="doTime"
 										placeholder="执行时间">
-
+									<input type="text" class="input datetime-picker" style="display:none;" id="doTime1" name="doTime1"
+										placeholder="执行时间">
 								</div>
 								<div class="item-media"></div>
 							</div>
@@ -174,7 +175,7 @@
 
 				</ul>
 
-               <input  type="hidden" name="repeatWeaks" value="" >
+               <input  type="hidden" id="repeatWeaks" name="repeatWeaks" value="" >
                <!--  <input  type="hidden" name="id" value="" >
                 <input  type="hidden" name="status" value="0" >
                 <input  type="hidden" name="createDatetime" value="0" >
@@ -196,13 +197,6 @@
 			</div>
 <input id="reset" name='reset' type="reset" style="display:none;" /> 
 		</form>
-
-
-
-		
-
-
-
 	</div>
 </div>
 
@@ -215,18 +209,28 @@ function checkSelect()
 	console.log($("#repeatType").val());
 	if ($("#repeatType").val().indexOf("每周")>0)
 		{
-		$("#weeklist").show("slowly");
+		  $("#weeklist").show("slowly");
+		}
+	else 	
+		{
+		  $("#weeklist").hide();
+		}
+	
+	if ($("#repeatType").val().indexOf("一次")>0 ||$("#repeatType").val().indexOf("每天")>0 )
+		{
+		
+		   $("#doTime").show(); $("#doTime1").hide();
 		}
 	else
 		{
-		$("#weeklist").hide();
+		 $("#doTime").hide(); 
+		 $("#doTime1").show();
+		 console.log("doTime1 show");
 		}
 }
 
 
-	$(function() {
-
-		
+	$(function() {	
 		
 		$(document)
 				.on(
@@ -247,7 +251,7 @@ function checkSelect()
 							$("#datetime-picker")
 									.datetimePicker(
 											{
-												toolbarTemplate : '<header class="bar bar-nav">\<button class="button button-link pull-right close-picker">确定</button>\<h1 class="title">请选择记录时间</h1>\</header>'
+												toolbarTemplate : '<header class="bar bar-nav">\<button class="button button-link pull-right close-picker">确定</button>\<h1 class="title">请选择执行时间</h1>\</header>'
 											});
 
 							$("#repeatType")
@@ -256,7 +260,7 @@ function checkSelect()
 												toolbarTemplate : '<header class="bar bar-nav">\<button  class="button button-link pull-left">\</button>\<button class="button button-link pull-right close-picker" onclick="checkSelect()">\确定\</button>\<h1 class="title">重复类型</h1>\</header>',
 												cols : [ {
 													textAlign : 'center',
-													values : [ '1.每天', '2.每月',
+													values : [ '0.一次','1.每天', '2.每月',
 															'3.每年', '4.每周' ],
 													cssClass : 'picker-items-col-normal'
 												} ]
@@ -277,6 +281,7 @@ function checkSelect()
 							$(".datetime-picker")
 									.datetimePicker(
 											{
+												
 												toolbarTemplate : '<header class="bar bar-nav">\<button class="button button-link pull-right close-picker">确定</button>\<h1 class="title">请选择记录时间</h1>\</header>'
 											});
 
@@ -289,6 +294,14 @@ function checkSelect()
 									.click(
 											function() {
 												var errtitle = "";
+												if ($("#doTime").val()=="" && $("#doTime1").val()!="")
+													{
+													$("#doTime").val("00:00");
+													}
+												 if  ($("#doTime1").val()=="" && $("#doTime").val()!="")
+													{
+														$("#doTime1").val("1971-01-01 00:00");
+														}   
 												$('.input')
 														.each(
 																function(e) {																	
@@ -306,11 +319,13 @@ function checkSelect()
 																		{
 																		$("input[type='checkbox']").each(function(e){
 																			if ($(this).get(0).checked)
-																			repeatWeeks += $(this).attr("name").substr($(this).attr("name").length-1);
+																			repeatWeeks += $(this).attr("name").substr($(this).attr("name").length-1) + ",";
 																			
 																		}) ;
 																		
-																		console.log(repeatWeeks);
+																		repeatWeeks = repeatWeeks.substr(0,repeatWeeks.length-1);
+																		console.log("repeatWeeks:"+repeatWeeks);
+																	
 																		if (repeatWeeks=="")
 																		{
 																		   $.toast("请选者重复的日期");
@@ -338,7 +353,8 @@ function checkSelect()
 																			this)
 																			.attr(
 																					"placeholder");
-																	if (thisval == "") {
+																	if (thisval == "") {																																																					
+																		
 																		errtitle += thismeaning
 																				+ ",";
 
@@ -368,6 +384,7 @@ function checkSelect()
 
 																});
 												if (errtitle != "") {
+													errtitle = errtitle.substring(0,errtitle.length-1);
 													//信息框
 													layer.open({
 														content : '请填写'

@@ -12,49 +12,25 @@
 
 	<div class="content">
 		<div class="list-block media-list">
+      <div class="list-block media-list">
       <ul>
-        <li>
-          <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
-            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+      <c:forEach items="${planlist}" var="plan">
+        
+        
+         <li>
+          <a href="#" class="item-link item-content">
             <div class="item-inner">
               <div class="item-title-row">
-                <div class="item-title">石头</div>
-                <div class="item-after">17:14</div>
+                <div class="item-title">${plan.title} </div>
+                <div class="item-after">${plan.doTime }</div>
               </div>
-              <div class="item-subtitle">New messages from John Doe</div>
-              <div class="item-text">Lorem ipsum dolor sit amet...</div>
+              <div class="item-subtitle">${plan.repeatType}</div>
+              <div class="item-text">此处是文本内容...</div>
             </div>
-          </label>
+          </a>
         </li>
-        <li>
-          <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
-            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title">剪刀</div>
-                <div class="item-after">17:14</div>
-              </div>
-              <div class="item-subtitle">New messages from John Doe</div>
-              <div class="item-text">Lorem ipsum dolor sit amet...</div>
-            </div>
-          </label>
-        </li>
-        <li>
-          <label class="label-checkbox item-content">
-            <input type="checkbox" name="checkbox">
-            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title">布</div>
-                <div class="item-after">17:14</div>
-              </div>
-              <div class="item-subtitle">New messages from John Doe</div>
-              <div class="item-text">Lorem ipsum dolor sit amet...</div>
-            </div>
-          </label>
-        </li>
+        
+       </c:forEach>
       </ul>
     </div>
 	</div>
