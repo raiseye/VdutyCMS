@@ -1,3 +1,4 @@
+<!-- 个人中心首页 -->
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/WEB-INF/views/common/taglibs.jsp"%>
 <c:set var="menu_active" value="nav_membercenter" />
