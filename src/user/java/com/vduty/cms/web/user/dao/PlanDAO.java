@@ -1,63 +1,34 @@
 package com.vduty.cms.web.user.dao;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.mysql.jdbc.ResultSetMetaData;
-import com.vduty.cms.web.user.entity.ItemDefine;
-import com.vduty.cms.web.user.entity.ItemMain;
-import com.vduty.cms.web.user.entity.User;
+import com.vduty.cms.web.user.entity.Plan;
 
 /**
- * 
+ * 计划任务
  * @author luther
  *
  */
 @Repository
 public interface PlanDAO {
 	
+	
 	/**
-	 * 获取plan
+	 * 添加plan
 	 * @param user  
 	 * @return
 	 */
-	//public ResultSet getItemData(long  itemDataId);
+	public long addPlan(Plan plan);
 	
+	public List<Plan> getPlans(Map<String,Long> map);
+    
+	public Plan planInfo(long planId);
 	
-	/**
-	 * 添加item
-	 * @param user  
-	 * @return
-	 */
-	public long addItemData(String addsql);
-	
-	public List<Map> getItemData(String sql);
-
-	
-	
-	
-	/**
-	 * 删除
-	 * @param itemid
-	 * @return
-	 */
-	public int deleteItemData(long id);
-	
-	
-	
-	
-	/**
-	 * 获取Item列表
-	 * @param itemId
-	 * @return
-	 */
-	//public ResultSet itemDataList(long itemMainId);
-	
-	
+	public int deletePlan(long planId);
+		
 
 	
 }

@@ -4,8 +4,8 @@
 <!-- pagegroup end -->
 
 
- <script  src="/public/lib/sui/sm.min.js" charset='utf-8' ></script>
-  <script src="/public/lib/sui/sm-extend.min.js" charset='utf-8'></script>
+ <script  src="${pageContext.request.contextPath}/public/lib/sui/sm.min.js" charset='utf-8' ></script>
+  <script src="${pageContext.request.contextPath}/public/lib/sui/sm-extend.min.js" charset='utf-8'></script>
 </body>
  
 

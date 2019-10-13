@@ -74,7 +74,9 @@ public class HomeController extends BaseController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+		model.addAttribute("title", "太太聊聊吧");
+		logger.info("网站成功进入!");
+		
 		return "main/index";
 	}
 

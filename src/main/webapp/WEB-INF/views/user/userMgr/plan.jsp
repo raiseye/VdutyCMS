@@ -1,4 +1,5 @@
 <!-- item我的计划列表-->
+<%@page import="com.vduty.cms.web.utils.MD5Utils"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/WEB-INF/views/common/taglibs.jsp"%>
 
@@ -11,47 +12,56 @@
 
 
 	<div class="content">
-		<!-- 这里是页面内容区 -->
-		<div class="content">
-			<!-- 这里是页面内容区 -->
-			<div class="page-index">
-				<div class="card">
-					<div
-						style="background-image: url(/public/images/e5b448d0f703918f89fd5e1a513d269758eec441.jpg);"
-						valign="bottom"
-						class="card-header color-white no-border card_title">宝宝喂奶</div>
-					<div class="card-content">
-						<div class="card-content-inner">
-							<p>重复：每个两小时一次；还有00:15:00到达提醒</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<div>创建于 2017/07/15</div>
-						<a href="#" class="link">关闭</a> <a href="dotask.html" class="link">执行</a>
-
-					</div>
-				</div>
-
-				<div class="card">
-					<div
-						style="background-image: url(/public/images/e5b448d0f703918f89fd5e1a513d269758eec441.jpg);"
-						valign="bottom"
-						class="card-header color-white no-border card_title">宝宝便便</div>
-					<div class="card-content">
-						<div class="card-content-inner">
-							<p>重复：每隔12小时一次；还有01:15:00到达提醒</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<div>创建于 2017/07/15</div>
-						<a href="#" class="link">关闭</a> <a href="dotask.html" class="link">执行</a>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-
+		<div class="list-block media-list">
+      <div class="list-block media-list">
+      <ul>
+      <c:forEach items="${planlist}" var="plan">               
+         <li>        
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title">${plan.title} </div>
+                <div class="item-after">  <fmt:formatDate value="${plan.doTime}" pattern="yyyy-MM-dd  HH:mm:ss" /> </div>
+              </div>
+              <c:set var="repeatType" value="每天111"/>
+              
+              <c:if test="${plan.repeatType==0}">
+              <c:set var="repeatType" value="一次"/>
+              </c:if>
+               <c:if test="${plan.repeatType==1}">
+              <c:set var="repeatType" value="每天"/>
+              </c:if>
+               <c:if test="${plan.repeatType==2}">
+              <c:set var="repeatType" value="每月"/>
+              </c:if>
+               <c:if test="${plan.repeatType==3}">
+              <c:set var="repeatType" value="每年"/>
+              </c:if>
+                <c:if test="${plan.repeatType==4}">
+              <c:set var="repeatType" value="每周"/>
+              </c:if>
+               <c:set var="alarmType" value="一次"/>
+              
+                <c:if test="${plan.alarmType==1}">
+              <c:set var="alarmType" value="提醒一次"/>
+              </c:if>
+              
+                 <c:if test="${plan.alarmType==2}">
+              <c:set var="alarmType" value="提醒三次"/>
+              </c:if>
+              
+               <c:if test="${plan.alarmType==3}">
+              <c:set var="alarmType" value="直到确认"/>
+              </c:if>
+              
+              <div class="item-text">${repeatType}，${alarmType}</div>
+            </div>
+          </a>
+        </li>
+        
+       </c:forEach>
+      </ul>
+    </div>
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/common/javascript_load.jsp"%>

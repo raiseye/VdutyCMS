@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vduty.cms.web.user.dao.PlanDAO">
+	
+	<insert id="addPlan" parameterType="com.vduty.cms.web.user.entity.Plan"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		plan(title,status,repeatWeaks,repeatType,doTime,alarmType,userId)
+		values(#{title},#{status},#{repeatWeaks},#{repeatType},#{doTime},#{alarmType},#{userId})
+	</insert>
+	
+	<select id="getPlans" parameterType="map"
+		resultType="com.vduty.cms.web.user.entity.Plan" >
+		select * from plan where userId = #{userId} limit #{startRecord},#{endRecord}
+	</select>
+		
+	<select id="planInfo" parameterType="long"
+		resultType="com.vduty.cms.web.user.entity.Plan" >
+		select * from plan where id = #{planId}
+	</select>
+	
+	<delete id="deletePlan" parameterType="long">
+		DELETE FROM plan WHERE id=#{planId}
+	</delete>
+
+
+</mapper>
+

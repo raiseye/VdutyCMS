@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>两只猫</title>
+    <title>${title_name}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,7 +26,7 @@
                   <span class="icon icon-left"></span>
                   返回
               </a>
-              <h1 class="title">两只猫</h1>
+              <h1 class="title">${title_name}</h1>
           </header>
           <nav class="bar bar-tab">
               <a class="tab-item external " href="/">

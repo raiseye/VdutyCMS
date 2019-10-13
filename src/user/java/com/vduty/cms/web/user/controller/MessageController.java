@@ -28,14 +28,14 @@ import com.vduty.cms.web.utils.MD5Utils;
 @RequestMapping("/manageruser/user")
 public class MessageController extends BaseController{
 	
-	@RequestMapping("/discover")
+
+	@RequestMapping("/message")
 	public String showUserMgr(@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap){
-		modelMap.put("active_admin", "active");
-		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
+		
 		Subject subject = SecurityUtils.getSubject();
 		modelMap.put("title_name",subject.getPrincipal());
-		return "/user/userMgr/discover";
+		return "/user/userMgr/message";
 	}
 	
 	

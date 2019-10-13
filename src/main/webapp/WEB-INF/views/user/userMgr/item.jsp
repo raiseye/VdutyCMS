@@ -9,7 +9,7 @@
 <c:set var="headerbar_back" value='<a id="headerbar_back" class="button button-link  pull-left"  href="${pageContext.request.contextPath}/manageruser/user/" data-transition="slide-out">返回</a>'/>
 		
 <c:set var="headerbar_right"
-	value="<a  class='button button-link button-nav pull-right'  href='/manageruser/user/itemedit'>设置</a>" />
+	value="<a  class='button button-link button-nav pull-right'  href='${pageContext.request.contextPath}/manageruser/user/itemedit'>设置</a>" />
 <c:set var="headerbar_title" value="记录分类" />
 <div class="page" id="page_main">
 	<%@ include file="/WEB-INF/views/user/headerbar.jsp"%>
@@ -55,7 +55,7 @@
 			$(".liitem").click(function(){
 				 var itemId = this.id.replace("li_","");
 				 console.log(itemId);
-				 location.href="/manageruser/user/item/add/"+itemId;		
+				 location.href="${pageContext.request.contextPath}/manageruser/user/item/add/"+itemId;		
 			});
 			
 			

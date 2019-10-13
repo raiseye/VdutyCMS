@@ -17,7 +17,8 @@ import com.vduty.cms.web.admin.service.AdminMgrService;
 @Controller
 public class BaseController {
 	
-	protected final Logger logger = Logger.getLogger(this.getClass());
+	//protected final Logger logger = Logger.getLogger(this.getClass());
+	protected final Logger logger = Logger.getLogger("com.vduty.cms");
 	
 	@Autowired
 	protected AdminMgrService adminService;
